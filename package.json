@@ -4,7 +4,7 @@
   "description": "boiler plate for a profile",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon server/server.js",
+    "dev": "nodemon --exec babel-node server/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/mkmorgan1/profile-maker#readme",
   "dependencies": {
+    "@babel/preset-env": "^7.13.5",
     "bcrypt": "^5.0.0",
     "ejs": "^3.1.6",
     "express": "^4.17.1",
@@ -28,6 +29,8 @@
     "passport-local": "^1.0.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.13.1",
+    "@babel/node": "^7.13.0",
     "dotenv": "^8.2.0",
     "nodemon": "^2.0.7"
   }
