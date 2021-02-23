@@ -8,29 +8,34 @@ const PORT = 8080;
 /* ENCRYPTION AND SESSIONS */
 import bcrypt from 'bcrypt';
 
+app.set('view-engin', 'ejs');
+app.use(express.urlencoded({ extended: false }));
+
 
 /* HOME */
 app.get('/', (req, res) => {
-
+  res.render('index.ejs');
 });
 
 /* LOGIN */
 app.get('/login', (req, res ) => {
-  res.render('login.ejs')
+  res.render('login.ejs');
 });
 app.post('/login', (req, res ) => {
-
+  console.log(req.body)
+  res.redirect('/');
 });
 
 /* REGISTER */
 app.get('/register', (req, res ) => {
-  res.render('register.ejs')
+  res.render('register.ejs');
 });
 app.post('/register', (req, res ) => {
-
+  console.log(req.body)
+  res.redirect('/login');
 });
 
 
 app.listen(PORT, () => {
-  console.log(`Listening on ${PORT}`)
+  console.log(`Listening on ${PORT}`);
 });
