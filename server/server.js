@@ -1,4 +1,5 @@
-/*  */
+/* DATABASE */
+import { createNewProfile } from '../database/index.js'
 
 /* Express Server and Port */
 import express from 'express';
@@ -30,11 +31,22 @@ app.post('/login', (req, res ) => {
 app.get('/register', (req, res ) => {
   res.render('register.ejs');
 });
-app.post('/register', (req, res ) => {
-  console.log(req.body)
-  res.redirect('/login');
+app.post('/register', async (req, res ) => {
+  try {
+    const password = await bcrypt.hash(req.body.password, 10);
+    const user = {
+      name: req.body.name,
+      email: req.body.email,
+      password: password
+    }
+    createNewProfile(user);
+    res.redirect('/login');
+  } catch {
+    res.redirect('/register');
+  }
 });
 
+/* LOGOUT */
 
 app.listen(PORT, () => {
   console.log(`Listening on ${PORT}`);
