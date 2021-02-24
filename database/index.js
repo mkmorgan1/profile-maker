@@ -21,6 +21,4 @@ export const createNewProfile = async (userInfo) => {
     email: userInfo.email,
     password: userInfo.password
   });
-  // const user = new Profile();
-  // // db.
 }

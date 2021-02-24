@@ -1,5 +1,5 @@
 /* DATABASE */
-import { createNewProfile } from '../database/index.js'
+import { createNewProfile } from '../database/index.js';
 
 /* Express Server and Port */
 import express from 'express';
@@ -8,6 +8,22 @@ const PORT = 8080;
 
 /* ENCRYPTION AND SESSIONS */
 import bcrypt from 'bcrypt';
+import passport from 'passport';
+import flash from 'express-flash';
+import session from 'express-session';
+import initializePassport from './passportConfig.js';
+
+initializePassport(
+  passport,
+  async email => await {},
+  async id => {}
+);
+
+app.use(flash());
+app.use(session({
+  resave: false,
+  saveUninitialized: false
+}));
 
 app.set('view-engin', 'ejs');
 app.use(express.urlencoded({ extended: false }));
@@ -39,7 +55,7 @@ app.post('/register', async (req, res ) => {
       email: req.body.email,
       password: password
     }
-    createNewProfile(user);
+    await createNewProfile(user);
     res.redirect('/login');
   } catch {
     res.redirect('/register');
