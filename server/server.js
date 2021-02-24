@@ -1,3 +1,8 @@
+
+/* FOR SECRET */
+import dotenv from 'dotenv';
+dotenv.config();
+
 /* DATABASE */
 import { createNewProfile } from '../database/index.js';
 
@@ -21,6 +26,7 @@ initializePassport(
 
 app.use(flash());
 app.use(session({
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false
 }));

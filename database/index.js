@@ -4,11 +4,8 @@ import { Profile } from './schema.js';
 try {
   mongoose.connect('mongodb://localhost/profiles', {useNewUrlParser: true, useUnifiedTopology: true});
 } catch(error) {
-  handleError(error);
+  console.error(error);
 }
-
-
-
 
 const db = mongoose.connection;
 db.once('open', () => {
