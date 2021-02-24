@@ -4,6 +4,9 @@
   "description": "boiler plate for a profile",
   "main": "index.js",
   "scripts": {
+    "startPm2": "pm2 start npm -- run start",
+    "stopPm2": "pm2 stop npm",
+    "start": "babel-node server/server.js",
     "dev": "nodemon --exec babel-node server/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
