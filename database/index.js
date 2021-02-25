@@ -19,3 +19,43 @@ export const createNewProfile = async (userInfo) => {
     password: userInfo.password
   });
 }
+
+export const getByEmail = (email) => {
+  return new Promise ((resolve, reject) => {
+    Profile.findOne({email: email}, (err, res) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(res);
+      }
+    })
+      .then(result => result)
+      .catch(err => err);
+  });
+}
+
+export const getById = (id) => {
+  return new Promise((resolve, reject) => {
+    Profile.findById(id, (err, res) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(res);
+      }
+    })
+      .then(result => result)
+      .catch(err => err);
+  });
+
+}
+
+/* tests */
+(async () => {
+  const user = await getByEmail('mkmorgan1994@gail.com');
+  console.log("user email: ", user);
+})();
+
+(async () => {
+  const user = await getById('6036aa325b7c57b3cc097111');
+  console.log("user Id: ", user);
+})();

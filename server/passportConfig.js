@@ -1,10 +1,13 @@
 import * as Local from 'passport-local';
 const LocalStrategy = Local.Strategy;
 import bcrypt from 'bcrypt';
+import { getByEmail, getById } from '../database/index.js';
 
-const initializePassport = (passport, getUserByEmail, getUserById) => {
+const initializePassport = (passport) => {
   const authenticateUser = async (email, password, done) => {
-    const user = getUserByEmail(email);
+    const user = await getByEmail(email);
+    console.log('USER', user);
+
     if (user == null) {
       return done(null, false, {message: 'Invalid email or password'});
     }
@@ -21,8 +24,8 @@ const initializePassport = (passport, getUserByEmail, getUserById) => {
   }
 
   passport.use(new LocalStrategy( {usernameField: 'email'}, authenticateUser ));
-  passport.serializeUser((user, done) => done(null, user.id));
-  passport.deserializeUser((id, done) => done(null, getUserById(id)));
+  passport.serializeUser((user, done) => done(null, user._id));
+  passport.deserializeUser((id, done) => done(null, getById(id)));
 }
 
 export default initializePassport;

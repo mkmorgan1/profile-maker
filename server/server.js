@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 /* DATABASE */
-import { createNewProfile } from '../database/index.js';
+import { createNewProfile, getByEmail, getById } from '../database/index.js';
 
 /* Express Server and Port */
 import express from 'express';
@@ -19,9 +19,9 @@ import session from 'express-session';
 import initializePassport from './passportConfig.js';
 
 initializePassport(
-  passport,
-  async email => await {},
-  async id => {}
+  passport
+  // async email => await getByEmail(email),
+  // async id => await getById()
 );
 
 app.use(flash());
