@@ -34,18 +34,26 @@ export const getByEmail = (email) => {
   });
 }
 
-export const getById = (id) => {
-  return new Promise((resolve, reject) => {
+export const getById = (id, done) => {
+  // return new Promise((resolve, reject) => {
+  //   Profile.findById(id, (err, res) => {
+  //     if (err) {
+  //       reject(err);
+  //     } else {
+  //       resolve(res);
+  //     }
+  //   })
+  //     .then(result => result)
+  //     .catch(err => err);
+  // });
     Profile.findById(id, (err, res) => {
       if (err) {
-        reject(err);
+        done(err);
       } else {
-        resolve(res);
+        done(null, res);
       }
-    })
-      .then(result => result)
-      .catch(err => err);
-  });
+    });
+
 
 }
 
@@ -55,7 +63,7 @@ export const getById = (id) => {
   console.log("user email: ", user);
 })();
 
-(async () => {
-  const user = await getById('6036aa325b7c57b3cc097111');
-  console.log("user Id: ", user);
-})();
+// (async () => {
+//   const user = await getById('6036aa325b7c57b3cc097111');
+//   console.log("user Id: ", user);
+// })();

@@ -18,11 +18,10 @@ import flash from 'express-flash';
 import session from 'express-session';
 import initializePassport from './passportConfig.js';
 
-initializePassport(
-  passport
-  // async email => await getByEmail(email),
-  // async id => await getById()
-);
+initializePassport(passport);
+
+app.set('view-engin', 'ejs');
+app.use(express.urlencoded({ extended: false }));
 
 app.use(flash());
 app.use(session({
@@ -31,29 +30,29 @@ app.use(session({
   saveUninitialized: false
 }));
 
-app.set('view-engin', 'ejs');
-app.use(express.urlencoded({ extended: false }));
-
+app.use(passport.initialize());
+app.use(passport.session());
 
 /* HOME */
-app.get('/', (req, res) => {
+app.get('/', checkAuthenticated, (req, res) => {
   res.render('index.ejs');
 });
 
 /* LOGIN */
-app.get('/login', (req, res ) => {
+app.get('/login', checkNotAuthenticated, (req, res ) => {
   res.render('login.ejs');
 });
-app.post('/login', (req, res ) => {
-  console.log(req.body)
-  res.redirect('/');
-});
+app.post('/login', checkNotAuthenticated, passport.authenticate('local', {
+  successRedirect: '/',
+  failureRedirect: '/login',
+  failureFlash: true,
+}));
 
 /* REGISTER */
-app.get('/register', (req, res ) => {
+app.get('/register', checkNotAuthenticated, (req, res ) => {
   res.render('register.ejs');
 });
-app.post('/register', async (req, res ) => {
+app.post('/register', checkNotAuthenticated, async (req, res ) => {
   try {
     const password = await bcrypt.hash(req.body.password, 10);
     const user = {
@@ -69,6 +68,23 @@ app.post('/register', async (req, res ) => {
 });
 
 /* LOGOUT */
+
+
+function checkAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next();
+  } else {
+    res.redirect('/login')
+  }
+}
+
+function checkNotAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) {
+    return res.redirect('/')
+  } else {
+    next();
+  }
+}
 
 app.listen(PORT, () => {
   console.log(`Listening on ${PORT}`);
