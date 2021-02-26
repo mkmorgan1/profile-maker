@@ -35,17 +35,6 @@ export const getByEmail = (email) => {
 }
 
 export const getById = (id, done) => {
-  // return new Promise((resolve, reject) => {
-  //   Profile.findById(id, (err, res) => {
-  //     if (err) {
-  //       reject(err);
-  //     } else {
-  //       resolve(res);
-  //     }
-  //   })
-  //     .then(result => result)
-  //     .catch(err => err);
-  // });
     Profile.findById(id, (err, res) => {
       if (err) {
         done(err);
@@ -62,8 +51,3 @@ export const getById = (id, done) => {
   const user = await getByEmail('mkmorgan1994@gail.com');
   console.log("user email: ", user);
 })();
-
-// (async () => {
-//   const user = await getById('6036aa325b7c57b3cc097111');
-//   console.log("user Id: ", user);
-// })();
