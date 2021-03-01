@@ -69,7 +69,6 @@ app.post('/register', checkNotAuthenticated, async (req, res ) => {
 
 /* LOGOUT */
 
-
 function checkAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
     return next();

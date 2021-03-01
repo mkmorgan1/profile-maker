@@ -35,19 +35,16 @@ export const getByEmail = (email) => {
 }
 
 export const getById = (id, done) => {
-    Profile.findById(id, (err, res) => {
-      if (err) {
-        done(err);
-      } else {
-        done(null, res);
-      }
-    });
-
-
+  Profile.findById(id, (err, res) => {
+    if (err) {
+      done(err);
+    } else {
+      done(null, res);
+    }
+  });
 }
 
-/* tests */
-(async () => {
-  const user = await getByEmail('mkmorgan1994@gail.com');
-  console.log("user email: ", user);
-})();
+afterAll(done => {
+  mongoose.connection.close();
+  done();
+});
