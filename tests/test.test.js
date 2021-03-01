@@ -1,6 +1,11 @@
 import "core-js/stable";
 import "regenerator-runtime/runtime";
-import { getById, getByEmail } from '../database/index.js';
+import { getById, getByEmail, db } from '../database/index.js';
+
+afterAll(done => {
+  db.close();
+  done();
+});
 
 describe('GET BY EMAIL', () => {
   test('TRUE EMAIL', async () => {

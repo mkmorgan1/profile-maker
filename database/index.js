@@ -7,7 +7,7 @@ try {
   console.error(error);
 }
 
-const db = mongoose.connection;
+export const db = mongoose.connection;
 db.once('open', () => {
   console.log('Connected to Mongodb');
 });
@@ -43,8 +43,3 @@ export const getById = (id, done) => {
     }
   });
 }
-
-afterAll(done => {
-  mongoose.connection.close();
-  done();
-});
