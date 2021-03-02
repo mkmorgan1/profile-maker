@@ -20,18 +20,14 @@ export const createNewProfile = async (userInfo) => {
   });
 }
 
-export const getByEmail = (email) => {
-  return new Promise ((resolve, reject) => {
-    Profile.findOne({email: email}, (err, res) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve(res);
-      }
-    })
-      .then(result => result)
-      .catch(err => err);
-  });
+export const getByEmail = (email, done) => {
+  Profile.findOne({email: email}, (err, res) => {
+    if (err) {
+      done(err);
+    } else {
+      done(null, res);
+    }
+  })
 }
 
 export const getById = (id, done) => {

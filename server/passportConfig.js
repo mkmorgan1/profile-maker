@@ -5,7 +5,11 @@ import { getByEmail, getById } from '../database/index.js';
 
 const initializePassport = (passport) => {
   const authenticateUser = async (email, password, done) => {
-    const user =  await getByEmail(email).then(result => result);
+    const user = await new Promise((resolve, reject) => {
+      getByEmail(email, (err, res) => {
+        err ? reject(err) : resolve(res);
+      })
+    }).then(result => result).catch(err => err);
 
     if (user == null) {
       return done(null, false, {message: 'Invalid email or password'});
@@ -24,7 +28,7 @@ const initializePassport = (passport) => {
 
   passport.use(new LocalStrategy( {usernameField: 'email'}, authenticateUser ));
   passport.serializeUser((user, done) => done(null, user.id));
-  passport.deserializeUser((id, done) => getById(id, done));//done(null, getById(id)));
+  passport.deserializeUser((id, done) => getById(id, done));
 }
 
 export default initializePassport;
