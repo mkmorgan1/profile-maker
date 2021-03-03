@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest test",
+    "build": "webpack --config webpack.config.js",
     "startPm2": "pm2 start npm -- run start",
     "stopPm2": "pm2 stop npm",
     "start": "babel-node server/server.js",
@@ -22,7 +23,11 @@
   "homepage": "https://github.com/mkmorgan1/profile-maker#readme",
   "dependencies": {
     "@babel/preset-env": "^7.13.5",
+    "@babel/preset-react": "^7.12.13",
+    "@babel/register": "^7.13.8",
+    "babel-loader": "^8.2.2",
     "bcrypt": "^5.0.0",
+    "css-loader": "^5.1.1",
     "ejs": "^3.1.6",
     "express": "^4.17.1",
     "express-flash": "0.0.2",
@@ -30,7 +35,11 @@
     "method-override": "^3.0.0",
     "mongoose": "^5.11.18",
     "passport": "^0.4.1",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "path-browserify": "^1.0.1",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "style-loader": "^2.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.13.1",
@@ -38,6 +47,8 @@
     "babel-jest": "^26.6.3",
     "dotenv": "^8.2.0",
     "jest": "^26.6.3",
-    "nodemon": "^2.0.7"
+    "nodemon": "^2.0.7",
+    "webpack": "^5.24.3",
+    "webpack-cli": "^4.5.0"
   }
 }

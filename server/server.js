@@ -6,8 +6,9 @@ dotenv.config();
 /* DATABASE */
 import { createNewProfile, getByEmail, getById } from '../database/index.js';
 
-/* Express Server and Port */
+/* EXPRESS PATH AND PORT */
 import express from 'express';
+import path from 'path';
 const app = express();
 const PORT = 8080;
 
@@ -21,9 +22,14 @@ import methodOverride from 'method-override';
 
 initializePassport(passport);
 
-app.set('view-engin', 'ejs');
+/* VIEWS FOR HTML AND EJS */
+app.engine('html', require('ejs').renderFile);
+app.set('view engine', 'ejs');
+app.set('view engine','html');
+
 app.use(express.urlencoded({ extended: false }));
 
+app.use(express.static(path.join(__dirname, '../views')));
 app.use(flash());
 app.use(session({
   secret: process.env.SESSION_SECRET,
@@ -37,7 +43,9 @@ app.use(methodOverride('_method'));
 
 /* HOME */
 app.get('/', checkAuthenticated, (req, res) => {
-  res.render('index.ejs');
+  // res.sendFile(path.join(__dirname, '../views/index.html'));
+  res.render('app.html', { user: req.user.name });
+  // res.render('index.ejs', { user: req.user.name });
 });
 
 /* LOGIN */
