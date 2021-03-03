@@ -17,6 +17,7 @@ import passport from 'passport';
 import flash from 'express-flash';
 import session from 'express-session';
 import initializePassport from './passportConfig.js';
+import methodOverride from 'method-override';
 
 initializePassport(passport);
 
@@ -32,6 +33,7 @@ app.use(session({
 
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(methodOverride('_method'));
 
 /* HOME */
 app.get('/', checkAuthenticated, (req, res) => {
@@ -68,6 +70,10 @@ app.post('/register', checkNotAuthenticated, async (req, res ) => {
 });
 
 /* LOGOUT */
+app.delete('/logout', (req,res) => {
+  req.logOut();
+  res.redirect('/login');
+})
 
 function checkAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
