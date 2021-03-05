@@ -7,11 +7,13 @@ try {
   console.error(error);
 }
 
+/* DB CONNECTION */
 export const db = mongoose.connection;
 db.once('open', () => {
   console.log('Connected to Mongodb');
 });
 
+/* CREATE NEW LOGIN */
 export const createNewProfile = async (userInfo) => {
   await Profile.create({
     name: userInfo.name,
@@ -19,7 +21,7 @@ export const createNewProfile = async (userInfo) => {
     password: userInfo.password
   });
 }
-
+/* EMAIL */
 export const getByEmail = (email, done) => {
   Profile.findOne({email: email}, (err, res) => {
     if (err) {
@@ -30,6 +32,7 @@ export const getByEmail = (email, done) => {
   })
 }
 
+/* ID */
 export const getById = (id, done) => {
   Profile.findById(id, (err, res) => {
     if (err) {

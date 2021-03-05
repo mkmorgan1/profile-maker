@@ -10,6 +10,7 @@ module.exports = {
       'fs': false,
     }
   },
+  watch: true,
   entry: {
     index: path.resolve(__dirname, './client/index.js')
   },
