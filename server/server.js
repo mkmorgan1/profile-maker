@@ -42,8 +42,9 @@ app.use(passport.session());
 app.use(methodOverride('_method'));
 
 /* HOME */
-app.get('/', checkAuthenticated, (req, res) => {
-  res.render('app.html', { user: req.user.name });
+app.get('/', /* checkAuthenticated,*/ (req, res) => {
+  // res.render('app.html', { user: req.user.name });
+  res.render('app.html', { user: 'req.user.name' });
 });
 
 /* LOGIN */
@@ -71,7 +72,8 @@ app.post('/register', checkNotAuthenticated, async (req, res ) => {
         name: req.body.name,
         email: req.body.email,
         password: password,
-        bio: ''
+        bio: '',
+        icon: 'far fa-grin-squint'
       }
       await createNewProfile(user);
       res.redirect('/login');
@@ -90,7 +92,14 @@ app.delete('/logout', (req,res) => {
 
 /* PROFILE */
 app.get('/profile', (req, res) => {
-  res.send(req.user);
+  const user = {
+    name: 'req.body.name',
+    email: 'req.body.email',
+    bio: '',
+    icon: 'far fa-grin-squint'
+  }
+  res.send(user);
+  //res.send(req.user);
 });
 
 function checkAuthenticated(req, res, next) {

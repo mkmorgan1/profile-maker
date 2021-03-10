@@ -1,14 +1,18 @@
+/* MODULES */
 import React from 'react';
-
+import { CSSTransition } from 'react-transition-group';
 import $ from 'jquery';
+/* COMPONENTS AND STYLE */
+import styles from './styles.module.css';
+import Bio from './Bio.jsx';
+import EditBio from './EditBio.jsx'
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
-      email: '',
-      bio: '',
+      profile: {name: '',email: '',bio: '', icon: ''},
+      edit: false,
     }
   }
 
@@ -21,6 +25,7 @@ class App extends React.Component {
           name: profile.name,
           email: profile.email,
           bio: profile.bio,
+          icon: profile.icon
         })
       }
     })
@@ -30,13 +35,8 @@ class App extends React.Component {
     return (
       <>
         <div>Hey</div>
-        <div >
-          <i class="far fa-grin-squint"></i>
-          <div>{`name: ${this.state.name}`}</div>
-          <div>{`email: ${this.state.email}`}</div>
-          <div>{`bio: ${this.state.bio}`}</div>
-        </div>
-
+        <Bio profile={this.state.profile}/>
+        <EditBio profile={this.state.profile}/>
       </>
     );
   }

@@ -1,0 +1,17 @@
+body {
+  background-image: url("https://images-for-backgrounds.s3.us-east-2.amazonaws.com/42331.jpg");
+  padding: 20px;
+  font-family: "Maven Pro", sans-serif;
+}
+
+.bioContainer {
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  background-color: aliceblue;
+  width: fit-content;
+}
+.icon {
+  font-size: 100px;
+}
