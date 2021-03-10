@@ -12,9 +12,15 @@ class App extends React.Component {
     super(props);
     this.state = {
       profile: {name: '',email: '',bio: '', icon: ''},
+      name: '',
+      email: '',
+      bio: '',
+      icon: '',
       edit: false,
+      placeHolder: ''
     }
     this.toggleEditView = this.toggleEditView.bind(this);
+    this.editFormInput = this.editFormInput.bind(this);
   }
 
   toggleEditView() {
@@ -26,6 +32,33 @@ class App extends React.Component {
     this.setState({
       edit: !this.state.edit
     });
+  }
+  editFormInput(e) {
+    switch (e.target.name) {
+      case 'name':
+        this.setState({
+          name: e.target.value
+        });
+        break;
+      case 'email':
+        this.setState({
+          email: e.target.value
+        });
+        break;
+      case 'bio':
+        this.setState({
+          bio: e.target.value
+        });
+        break;
+      case 'icon':
+        this.setState({
+          icon: e.target.value
+        });
+        break;
+      default:
+        break;
+    }
+
   }
 
   componentDidMount() {
@@ -39,7 +72,11 @@ class App extends React.Component {
             email: profile.email,
             bio: profile.bio,
             icon: profile.icon
-          }
+          },
+          name: profile.name,
+          email: profile.email,
+          bio: profile.bio,
+          icon: profile.icon
         });
       }
     });
@@ -48,7 +85,10 @@ class App extends React.Component {
   render () {
     const editPopup = this.state.edit
     return (
-      <div>
+      <div className={styles.fullApplication}>
+        <div className={styles.header}>
+          <i class="fas fa-bullhorn"></i>
+        </div>
         <CSSTransition
           in={editPopup}
           timeout={300}
@@ -62,8 +102,14 @@ class App extends React.Component {
         >
           {/* POPUP EDIT */}
           <EditProfile
-            profile={this.state.profile}
+            profile={{
+              name: this.state.name,
+              email: this.state.email,
+              bio: this.state.bio,
+              icon: this.state.icon,
+            }}
             toggleEditView={this.toggleEditView}
+            editFormInput={this.editFormInput}
           />
         </CSSTransition>
 
@@ -72,6 +118,7 @@ class App extends React.Component {
           profile={this.state.profile}
           toggleEditView={this.toggleEditView}
         />
+        <div className={styles.postsContainer}></div>
       </div>
     );
   }

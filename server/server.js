@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 /* DATABASE */
-import { createNewProfile, getByEmail, getById } from '../database/index.js';
+import { createNewProfile, getByEmail, getById , updateProfile} from '../database/index.js';
 
 /* EXPRESS PATH AND PORT */
 import express from 'express';
@@ -42,7 +42,7 @@ app.use(passport.session());
 app.use(methodOverride('_method'));
 
 /* HOME */
-app.get('/', /* checkAuthenticated,*/ (req, res) => {
+app.get('/', /*checkAuthenticated,*/ (req, res) => {
   // res.render('app.html', { user: req.user.name });
   res.render('app.html', { user: 'req.user.name' });
 });
@@ -99,20 +99,27 @@ app.get('/profile', (req, res) => {
     icon: 'far fa-grin-squint'
   }
   res.send(user);
-  //res.send(req.user);
+  // res.send(req.user);
+});
+
+/* EDIT PROFILE */
+app.post('/edit', (req, res) => {
+  updateProfile(req.user.id, req.body, (err, result) => {
+    err ? res.status(404).send(err) :  res.redirect('/')
+  });
 });
 
 function checkAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
   } else {
-    res.redirect('/login')
+    res.redirect('/login');
   }
 }
 
 function checkNotAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
-    return res.redirect('/')
+    return res.redirect('/');
   } else {
     next();
   }

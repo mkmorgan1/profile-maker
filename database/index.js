@@ -42,3 +42,15 @@ export const getById = (id, done) => {
     }
   });
 }
+
+export const updateProfile = (id, updated, done) => {
+  const query = {_id: id}
+  const toUpdate = {name: updated.name, bio: updated.bio}
+  Profile.updateOne(query, toUpdate, (err, res) => {
+    if (err) {
+      done(err);
+    } else {
+      done(null, res);
+    }
+  });
+}
