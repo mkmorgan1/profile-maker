@@ -43,9 +43,7 @@ app.use(methodOverride('_method'));
 
 /* HOME */
 app.get('/', checkAuthenticated, (req, res) => {
-  // res.sendFile(path.join(__dirname, '../views/index.html'));
   res.render('app.html', { user: req.user.name });
-  // res.render('index.ejs', { user: req.user.name });
 });
 
 /* LOGIN */
@@ -63,25 +61,37 @@ app.get('/register', checkNotAuthenticated, (req, res ) => {
   res.render('register.ejs');
 });
 app.post('/register', checkNotAuthenticated, async (req, res ) => {
-  try {
-    const password = await bcrypt.hash(req.body.password, 10);
-    const user = {
-      name: req.body.name,
-      email: req.body.email,
-      password: password
-    }
-    await createNewProfile(user);
-    res.redirect('/login');
-  } catch {
+  if (req.body.password !== req.body.confirmPassword) {
+    req.flash('match', 'Passwords do not match');
     res.redirect('/register');
+  } else {
+    try {
+      const password = await bcrypt.hash(req.body.password, 10);
+      const user = {
+        name: req.body.name,
+        email: req.body.email,
+        password: password,
+        bio: ''
+      }
+      await createNewProfile(user);
+      res.redirect('/login');
+    } catch {
+      res.redirect('/register');
+    }
   }
+
 });
 
 /* LOGOUT */
 app.delete('/logout', (req,res) => {
   req.logOut();
   res.redirect('/login');
-})
+});
+
+/* PROFILE */
+app.get('/profile', (req, res) => {
+  res.send(req.user);
+});
 
 function checkAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
