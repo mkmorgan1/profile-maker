@@ -19,14 +19,14 @@ const EditProfile = ({profile, toggleEditView}) => {
         <hr/>
         <form action='/edit' method='Post'>
           <label htmlFor='name'>Name: </label>
-          <input type='text' id='name' name='name' value={profile.name}/>
+          <input type='text' id='name' name='name' value={profile.name} onChange={()=>{}}/>
           <hr/>
           <label htmlFor='email'>Email: </label>
-          <input type='text' id='email' name='email' value={profile.email}/>
+          <input type='text' id='email' name='email' value={profile.email} onChange={()=>{}}/>
           <hr/>
           <label htmlFor='bio'>Bio: </label>
           <br/>
-          <textarea type='text' id='bio' name='bio' rows='10' value={profile.bio}/>
+          <textarea type='text' id='bio' name='bio' rows='10' value={profile.bio} onChange={()=>{}}/>
         </form>
         <Button onClick={toggleEditView}>
           Save Changes

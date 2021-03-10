@@ -25,7 +25,7 @@ class App extends React.Component {
     }
     this.setState({
       edit: !this.state.edit
-    })
+    });
   }
 
   componentDidMount() {
@@ -40,26 +40,33 @@ class App extends React.Component {
             bio: profile.bio,
             icon: profile.icon
           }
-        })
+        });
       }
-    })
+    });
   }
 
   render () {
     const editPopup = this.state.edit
     return (
       <div>
-        <form action="/logout?_method=DELETE" method="POST">
-          <button type="submit">LOG OUT</button>
-        </form>
-        <div>Hey</div>
-        {/* POPUP EDIT */}
-        {editPopup &&
+        <CSSTransition
+          in={editPopup}
+          timeout={300}
+          classNames={{
+            enterActive: styles.alertEnterActive,
+            enter: styles.alertEnter,
+            exitActive: styles.alertExitActive,
+            exit: styles.alertExit,
+          }}
+          unmountOnExit
+        >
+          {/* POPUP EDIT */}
           <EditProfile
             profile={this.state.profile}
             toggleEditView={this.toggleEditView}
           />
-        }
+        </CSSTransition>
+
         {/* PROFILE SIDEBAR */}
         <Profile
           profile={this.state.profile}
