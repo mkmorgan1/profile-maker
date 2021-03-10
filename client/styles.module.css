@@ -1,37 +1,67 @@
 body {
   background-image: url("https://images-for-backgrounds.s3.us-east-2.amazonaws.com/42331.jpg");
-  padding: 20px;
+  padding: 20px 0;
   font-family: "Maven Pro", sans-serif;
 }
 
 /* BIO */
 .bioContainer {
-  padding: 20px;
+  padding: 30px;
   border-radius: 10px;
   text-align: center;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
   background-color: aliceblue;
   width: fit-content;
+  height: 100vh;
+  float: left;
 }
 .icon {
   font-size: 100px;
 }
-.editBtn {
+/* BUTTONS ON PROFILE */
+.bioBtns {
   color: rgba(0, 0, 0, 0.445);
   cursor: pointer;
+  display: inline;
+}
+.editBtn {
   text-align: right;
 }
-.editBtn:hover {
+.bioBtns:hover {
   color: black;
+}
+.logoutBtn {
+  border: 0;
+  padding: 0;
+  font-family: inherit;
+  font-size: 110%;
+  text-align: left;
+  background-color: aliceblue;
+  width: auto;
+}
+.btns {
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+.logoutForm {
+  padding: 0;
+  text-align: left;
 }
 
 /* EDIT ALERT */
 .editContainer {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-top: -25vh;
+  margin-left: -25vh;
   padding: 20px;
   border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
   background-color: aliceblue;
-  width: fit-content;
+  width: 50vh;
+  height: 50vh;
+  z-index: 999;
 }
 .closeBtn {
   cursor: pointer;

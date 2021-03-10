@@ -18,6 +18,11 @@ class App extends React.Component {
   }
 
   toggleEditView() {
+    if (this.state.edit) {
+      $('body').css('overflow','auto');
+    } else {
+      $('body').css('overflow','hidden');
+    }
     this.setState({
       edit: !this.state.edit
     })
@@ -41,18 +46,26 @@ class App extends React.Component {
   }
 
   render () {
+    const editPopup = this.state.edit
     return (
-      <>
+      <div>
+        <form action="/logout?_method=DELETE" method="POST">
+          <button type="submit">LOG OUT</button>
+        </form>
         <div>Hey</div>
-        {!this.state.edit && <Profile
+        {/* POPUP EDIT */}
+        {editPopup &&
+          <EditProfile
+            profile={this.state.profile}
+            toggleEditView={this.toggleEditView}
+          />
+        }
+        {/* PROFILE SIDEBAR */}
+        <Profile
           profile={this.state.profile}
           toggleEditView={this.toggleEditView}
-        />}
-        {this.state.edit && <EditProfile
-          profile={this.state.profile}
-          toggleEditView={this.toggleEditView}
-        />}
-      </>
+        />
+      </div>
     );
   }
 
