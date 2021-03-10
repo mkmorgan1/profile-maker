@@ -20,6 +20,7 @@ const EditProfile = ({profile, toggleEditView, editFormInput}) => {
         <form action='/edit' method='Post'>
           <label htmlFor='name'>Name: </label>
           <input type='text' id='name' name='name' value={profile.name} onChange={editFormInput}/>
+          {/* INCASE I WANT TO EDIT EMAIL */}
           {/* <hr/>
           <label htmlFor='email'>Email: </label>
           <input type='email' id='email' name='email' value={profile.email} onChange={editFormInput}/> */}

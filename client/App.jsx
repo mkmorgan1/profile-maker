@@ -5,7 +5,8 @@ import $ from 'jquery';
 /* COMPONENTS AND STYLE */
 import styles from './styles.module.css';
 import Profile from './Profile.jsx';
-import EditProfile from './EditProfile.jsx'
+import EditProfile from './EditProfile.jsx';
+import AllMessages from './AllMessages.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -17,7 +18,7 @@ class App extends React.Component {
       bio: '',
       icon: '',
       edit: false,
-      placeHolder: ''
+      messages: [{name: 'name', date: 'date', message: 'words'}, {name: 'name2', date: 'date2', message: 'words2'}],
     }
     this.toggleEditView = this.toggleEditView.bind(this);
     this.editFormInput = this.editFormInput.bind(this);
@@ -118,7 +119,11 @@ class App extends React.Component {
           profile={this.state.profile}
           toggleEditView={this.toggleEditView}
         />
-        <div className={styles.postsContainer}></div>
+        <div className={styles.postsContainer}>
+        <AllMessages
+          messages={this.state.messages}
+        />
+        </div>
       </div>
     );
   }
