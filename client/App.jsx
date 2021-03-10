@@ -4,8 +4,8 @@ import { CSSTransition } from 'react-transition-group';
 import $ from 'jquery';
 /* COMPONENTS AND STYLE */
 import styles from './styles.module.css';
-import Bio from './Bio.jsx';
-import EditBio from './EditBio.jsx'
+import Profile from './Profile.jsx';
+import EditProfile from './EditProfile.jsx'
 
 class App extends React.Component {
   constructor(props) {
@@ -14,6 +14,13 @@ class App extends React.Component {
       profile: {name: '',email: '',bio: '', icon: ''},
       edit: false,
     }
+    this.toggleEditView = this.toggleEditView.bind(this);
+  }
+
+  toggleEditView() {
+    this.setState({
+      edit: !this.state.edit
+    })
   }
 
   componentDidMount() {
@@ -22,10 +29,12 @@ class App extends React.Component {
       dataType: 'json',
       success: (profile) => {
         this.setState({
-          name: profile.name,
-          email: profile.email,
-          bio: profile.bio,
-          icon: profile.icon
+          profile: {
+            name: profile.name,
+            email: profile.email,
+            bio: profile.bio,
+            icon: profile.icon
+          }
         })
       }
     })
@@ -35,8 +44,14 @@ class App extends React.Component {
     return (
       <>
         <div>Hey</div>
-        <Bio profile={this.state.profile}/>
-        <EditBio profile={this.state.profile}/>
+        {!this.state.edit && <Profile
+          profile={this.state.profile}
+          toggleEditView={this.toggleEditView}
+        />}
+        {this.state.edit && <EditProfile
+          profile={this.state.profile}
+          toggleEditView={this.toggleEditView}
+        />}
       </>
     );
   }

@@ -39,6 +39,7 @@
     "passport-local": "^1.0.0",
     "path-browserify": "^1.0.1",
     "react": "^17.0.1",
+    "react-bootstrap": "^1.5.1",
     "react-dom": "^17.0.1",
     "react-transition-group": "^4.4.1",
     "style-loader": "^2.0.0"
