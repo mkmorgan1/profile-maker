@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 /* DATABASE */
-import { createNewProfile, getByEmail, getById , updateProfile} from '../database/index.js';
+import { createNewProfile, getByEmail, getById , updateProfile, postMessage } from '../database/index.js';
 
 /* EXPRESS PATH AND PORT */
 import express from 'express';
@@ -105,6 +105,20 @@ app.get('/profile', (req, res) => {
 /* EDIT PROFILE */
 app.post('/edit', (req, res) => {
   updateProfile(req.user.id, req.body, (err, result) => {
+    err ? res.status(404).send(err) :  res.redirect('/')
+  });
+});
+
+/* POST MESSAGE */
+app.post('/postMessage', (req, res) => {
+  const time = new Date();
+  const dateTime = `(${time.getDate()}/${time.getMonth()+1}/${time.getFullYear()}) ${time.getHours()}:${time.getSeconds()}`
+  let post = {
+    name: 'bob',//req.user.name,
+    message: req.body.postMessage,
+    date: dateTime
+  }
+  postMessage(post, (err, result) => {
     err ? res.status(404).send(err) :  res.redirect('/')
   });
 });

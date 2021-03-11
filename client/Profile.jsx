@@ -10,10 +10,10 @@ const Bio = ({profile, toggleEditView}) => {
         <div className={styles.btns}>
           <span className={`${styles.inline}`}>
             <form action='/logout?_method=DELETE' method='POST' className={styles.logoutForm}>
-              <button type='submit' className={`${styles.logoutBtn} ${styles.bioBtns}`}><i className='fas fa-sign-out-alt'></i></button>
+              <button type='submit' className={`${styles.logoutBtn} ${styles.btn}`}><i className='fas fa-sign-out-alt'></i></button>
             </form>
           </span>
-          <span className={`${styles.editBtn} ${styles.bioBtns}`} onClick={toggleEditView}>
+          <span className={`${styles.editBtn} ${styles.btn}`} onClick={toggleEditView}>
             <i className='far fa-edit'></i>
           </span>
         </div>

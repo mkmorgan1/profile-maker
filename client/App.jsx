@@ -7,6 +7,7 @@ import styles from './styles.module.css';
 import Profile from './Profile.jsx';
 import EditProfile from './EditProfile.jsx';
 import AllMessages from './AllMessages.jsx';
+import PostMessage from './PostMessage.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -87,9 +88,7 @@ class App extends React.Component {
     const editPopup = this.state.edit
     return (
       <div className={styles.fullApplication}>
-        <div className={styles.header}>
-          <i class="fas fa-bullhorn"></i>
-        </div>
+        <div className={styles.header}></div>
         <CSSTransition
           in={editPopup}
           timeout={300}
@@ -120,9 +119,10 @@ class App extends React.Component {
           toggleEditView={this.toggleEditView}
         />
         <div className={styles.postsContainer}>
-        <AllMessages
-          messages={this.state.messages}
-        />
+          <PostMessage/>
+          <AllMessages
+            messages={this.state.messages}
+          />
         </div>
       </div>
     );

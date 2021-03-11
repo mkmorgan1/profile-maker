@@ -13,7 +13,7 @@ const IndividualMessage = ({post}) => {
 
 const AllMessages = ({messages}) => {
   return messages.map((post) => {
-    return <IndividualMessage post={post}/>
+    return <IndividualMessage key={post.date} post={post}/>
   });
 }
 

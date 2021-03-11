@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { Profile } from './schema.js';
+import { Profile, Message } from './schema.js';
 
 try {
   mongoose.connect('mongodb://localhost/profiles', {useNewUrlParser: true, useUnifiedTopology: true});
@@ -15,11 +15,16 @@ db.once('open', () => {
 
 /* CREATE NEW LOGIN */
 export const createNewProfile = async (userInfo) => {
-  await Profile.create({
-    name: userInfo.name,
-    email: userInfo.email,
-    password: userInfo.password
-  });
+  try {
+    await Profile.create({
+      name: userInfo.name,
+      email: userInfo.email,
+      password: userInfo.password
+    });
+  } catch (err) {
+    console.error(error);
+  }
+
 }
 /* EMAIL */
 export const getByEmail = (email, done) => {
@@ -43,6 +48,7 @@ export const getById = (id, done) => {
   });
 }
 
+/* UPDATE */
 export const updateProfile = (id, updated, done) => {
   const query = {_id: id}
   const toUpdate = {name: updated.name, bio: updated.bio}
@@ -53,4 +59,15 @@ export const updateProfile = (id, updated, done) => {
       done(null, res);
     }
   });
+}
+
+/* POST MESSAGE */
+export const postMessage = (post, done) => {
+  Message.create(post, (err, res) => {
+    if (err) {
+      done(err);
+    } else {
+      done(null, res);
+    }
+  })
 }
