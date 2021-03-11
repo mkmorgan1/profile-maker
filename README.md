@@ -12,13 +12,21 @@ Ensure MongoDB is installed and running
 
 ## Run
 
-Production
+Node
 
 ```bash
   npm start
 ```
 
-Development
+PM2
+
+```bash
+  npm run startPm2
+    or
+  npm run stopPm2
+```
+
+Development (nodemon)
 
 ```bash
   npm run dev
