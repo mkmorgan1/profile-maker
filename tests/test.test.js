@@ -1,5 +1,5 @@
-import "core-js/stable";
-import "regenerator-runtime/runtime";
+import 'core-js/stable';
+import 'regenerator-runtime/runtime';
 import { getById, getByEmail, db } from '../database/index.js';
 
 afterAll(done => {

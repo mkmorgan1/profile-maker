@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import AllMessages from '../client/AllMessages.jsx';
 import { Profile, Message } from './schema.js';
 
 try {
@@ -70,4 +71,15 @@ export const postMessage = (post, done) => {
       done(null, res);
     }
   })
+}
+
+/* GET ALL MESSAGES */
+export const getAllMessages = (done) => {
+  Message.find({}, (err, res) => {
+    if (err) {
+      done(err);
+    } else {
+      done(null, res);
+    }
+  });
 }

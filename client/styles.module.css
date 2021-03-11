@@ -35,7 +35,7 @@ textarea {
   background-image: url("https://images-for-backgrounds.s3.us-east-2.amazonaws.com/42331.jpg");
   grid-area: header;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
-  width: 100%;
+  width: 110%;
   font-size: 50px;
 }
 
@@ -48,10 +48,13 @@ textarea {
   grid-area: bio;
   margin-top: -50px;
   text-align: center;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px,
+    rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px,
+    rgba(0, 0, 0, 0.09) 0px 32px 16px;
   background-color: white;
-  padding: 20px;
-  border-radius: 10px;
+  padding: 30px;
+  border-radius: 60px;
+  height: 110%;
 }
 .icon {
   font-size: 150px;
@@ -101,9 +104,11 @@ textarea {
   left: 50%;
   margin-top: -25vh;
   margin-left: -25vh;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  padding: 40px;
+  border-radius: 40px;
+  box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px,
+    rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px,
+    rgba(0, 0, 0, 0.09) 0px 32px 16px;
   background-color: white;
   min-width: 50vh;
   min-height: 50vh;
@@ -121,6 +126,30 @@ textarea {
   height: 120vh;
   background-color: rgba(0, 0, 0, 0.452);
   z-index: 800;
+}
+.editNameInput {
+  border-radius: 10px;
+  padding: 10px;
+  border: none;
+  box-shadow: rgba(50, 50, 93, 0.048) 0px 30px 60px -12px inset,
+    rgba(0, 0, 0, 0.041) 0px 18px 36px -18px inset;
+}
+.editBioTextArea {
+  border-radius: 20px;
+  resize: none;
+  padding: 20px;
+  border: none;
+  box-shadow: rgba(50, 50, 93, 0.048) 0px 30px 60px -12px inset,
+    rgba(0, 0, 0, 0.041) 0px 18px 36px -18px inset;
+}
+.editSaveBtn {
+  padding: 10px;
+  border-radius: 10px;
+  background-color: rgba(153, 205, 50, 0.548);
+  border: none;
+}
+.editSaveBtn:hover {
+  background-color: yellowgreen;
 }
 
 /* ALERT TRANSITION  */
@@ -149,7 +178,7 @@ textarea {
 */
 .postsContainer {
   grid-area: posts;
-  background-color: rgba(255, 255, 255, 0.445);
+  align-items: center;
   height: 100%;
   width: 100%;
   padding: 30px;
@@ -160,6 +189,9 @@ textarea {
   padding: 20px 100px 20px 50px;
   text-align: center;
   width: fit-content;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+  transform: translateX(60px);
 }
 .messagePostBtn {
   border: 0;
@@ -171,9 +203,39 @@ textarea {
 }
 .postInput {
   border: none;
-  padding: 10px 20px;
+  padding: 20px;
   margin-right: 20px;
   background-color: rgba(255, 255, 255, 0.692);
   border-radius: 30px;
   resize: none;
+}
+
+/*
+=============================
+  MESSAGES
+=============================
+*/
+.messageContainer {
+  margin: 20px;
+  background-color: yellowgreen;
+  border-radius: 50px;
+  padding: 20px 100px 20px 50px;
+  width: 70%;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+}
+.messageName {
+  font-size: 40px;
+  text-align: left;
+}
+.messageDate {
+  color: rgba(0, 0, 0, 0.534);
+  text-align: right;
+  transform: translateY(-30px);
+}
+.message {
+  text-align: left;
+  background-color: rgba(255, 255, 255, 0.692);
+  padding: 20px;
+  border-radius: 20px;
 }

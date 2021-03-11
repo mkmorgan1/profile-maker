@@ -13,18 +13,23 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      profile: {name: '',email: '',bio: '', icon: ''},
+      profile: {name: '', email: '', bio: '', icon: ''},
       name: '',
       email: '',
       bio: '',
       icon: '',
       edit: false,
-      messages: [{name: 'name', date: 'date', message: 'words'}, {name: 'name2', date: 'date2', message: 'words2'}],
+      messages: [],
     }
     this.toggleEditView = this.toggleEditView.bind(this);
     this.editFormInput = this.editFormInput.bind(this);
   }
 
+  /*
+  ----------------------
+    HANDLES EDIT POPUP
+  ----------------------
+  */
   toggleEditView() {
     if (this.state.edit) {
       $('body').css('overflow','auto');
@@ -35,6 +40,12 @@ class App extends React.Component {
       edit: !this.state.edit
     });
   }
+
+  /*
+  ------------------------------
+    HOLDS VALUES FOR EDIT FORM
+  ------------------------------
+  */
   editFormInput(e) {
     switch (e.target.name) {
       case 'name':
@@ -60,25 +71,31 @@ class App extends React.Component {
       default:
         break;
     }
-
   }
+
+  /*
+  --------------------------------------------
+    RETRIEVES THE USER DATA FROM THE DATABASE
+  --------------------------------------------
+  */
 
   componentDidMount() {
     $.ajax({
-      url: '/profile',
+      url: '/data',
       dataType: 'json',
-      success: (profile) => {
+      success: (data) => {
         this.setState({
           profile: {
-            name: profile.name,
-            email: profile.email,
-            bio: profile.bio,
-            icon: profile.icon
+            name: data.user.name,
+            email: data.user.email,
+            bio: data.user.bio,
+            icon: data.user.icon,
           },
-          name: profile.name,
-          email: profile.email,
-          bio: profile.bio,
-          icon: profile.icon
+          name: data.user.name,
+          email: data.user.email,
+          bio: data.user.bio,
+          icon: data.user.icon,
+          messages: data.messages,
         });
       }
     });
@@ -100,8 +117,9 @@ class App extends React.Component {
           }}
           unmountOnExit
         >
-          {/* POPUP EDIT */}
+          {/* EDIT BIO POPUP  */}
           <EditProfile
+            styles={styles}
             profile={{
               name: this.state.name,
               email: this.state.email,
@@ -115,12 +133,16 @@ class App extends React.Component {
 
         {/* PROFILE SIDEBAR */}
         <Profile
+          styles={styles}
           profile={this.state.profile}
           toggleEditView={this.toggleEditView}
         />
         <div className={styles.postsContainer}>
-          <PostMessage/>
+          <PostMessage
+            styles={styles}
+          />
           <AllMessages
+            styles={styles}
             messages={this.state.messages}
           />
         </div>

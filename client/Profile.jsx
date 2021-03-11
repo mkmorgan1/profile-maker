@@ -1,7 +1,6 @@
 import React from 'react';
-import styles from './styles.module.css';
 
-const Bio = ({profile, toggleEditView}) => {
+const Bio = ({profile, toggleEditView, styles}) => {
 
   return (
     <div className={styles.bioContainer}>

@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 /* DATABASE */
-import { createNewProfile, getByEmail, getById , updateProfile, postMessage } from '../database/index.js';
+import { createNewProfile, getByEmail, getById , updateProfile, postMessage, getAllMessages} from '../database/index.js';
 
 /* EXPRESS PATH AND PORT */
 import express from 'express';
@@ -34,7 +34,7 @@ app.use(flash());
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
-  saveUninitialized: false
+  saveUninitialized: false,
 }));
 
 app.use(passport.initialize());
@@ -42,9 +42,8 @@ app.use(passport.session());
 app.use(methodOverride('_method'));
 
 /* HOME */
-app.get('/', /*checkAuthenticated,*/ (req, res) => {
-  // res.render('app.html', { user: req.user.name });
-  res.render('app.html', { user: 'req.user.name' });
+app.get('/', checkAuthenticated, (req, res) => {
+  res.render('app.html', { user: req.user.name });
 });
 
 /* LOGIN */
@@ -81,7 +80,6 @@ app.post('/register', checkNotAuthenticated, async (req, res ) => {
       res.redirect('/register');
     }
   }
-
 });
 
 /* LOGOUT */
@@ -91,35 +89,29 @@ app.delete('/logout', (req,res) => {
 });
 
 /* PROFILE */
-app.get('/profile', (req, res) => {
-  const user = {
-    name: 'req.body.name',
-    email: 'req.body.email',
-    bio: '',
-    icon: 'far fa-grin-squint'
-  }
-  res.send(user);
-  // res.send(req.user);
+app.get('/data', (req, res) => {
+  getAllMessages((err, messages) => {
+    err ? res.status(404).send(err) :  res.status(200).send({messages: messages, user: req.user});
+  });
 });
 
 /* EDIT PROFILE */
 app.post('/edit', (req, res) => {
   updateProfile(req.user.id, req.body, (err, result) => {
-    err ? res.status(404).send(err) :  res.redirect('/')
+    err ? res.status(404).send(err) :  res.redirect('/');
   });
 });
 
-/* POST MESSAGE */
 app.post('/postMessage', (req, res) => {
   const time = new Date();
-  const dateTime = `(${time.getDate()}/${time.getMonth()+1}/${time.getFullYear()}) ${time.getHours()}:${time.getSeconds()}`
+  const dateTime = `(${time.getDate()}/${time.getMonth()+1}/${time.getFullYear()}) ${time.getHours()}:${time.getSeconds()}`;
   let post = {
-    name: 'bob',//req.user.name,
+    name: req.user.name,
     message: req.body.postMessage,
-    date: dateTime
+    date: dateTime,
   }
   postMessage(post, (err, result) => {
-    err ? res.status(404).send(err) :  res.redirect('/')
+    err ? res.status(404).send(err) :  res.redirect('/');
   });
 });
 

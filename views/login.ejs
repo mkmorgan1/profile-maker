@@ -1,16 +1,23 @@
-<h1>LOGIN</h1>
-<% if (messages.error) {%>
-  <%= messages.error %>
-<% } %>
-<form action="/login" method="POST">
-  <div>
-    <label for="email">Email</label>
-    <input type="text" id="email" name="email" required>
-  </div>
-  <div>
-    <label for="password">Password</label>
-    <input type="password" id="password" name="password" required>
-  </div>
-  <button type="submit">Login</button>
-</form>
-<a href="/register">Register</a>
+
+
+<link href= "./styles.css" rel="stylesheet" type="text/css" />
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Maven+Pro:wght@400;600&display=swap" rel="stylesheet">
+<div class="loginBox">
+  <h1>LOGIN</h1>
+  <% if (messages.error) {%>
+    <%= messages.error %>
+  <% } %>
+  <form action="/login" method="POST">
+    <div>
+      <label for="email">Email</label>
+      <input type="text" id="email" name="email" required>
+    </div>
+    <div>
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" required>
+    </div>
+    <button type="submit">Login</button>
+  </form>
+  <a href="/register">Register</a>
+</div>
