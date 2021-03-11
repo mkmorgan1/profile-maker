@@ -32,7 +32,8 @@ textarea {
 =============================
 */
 .header {
-  background-image: url("https://images-for-backgrounds.s3.us-east-2.amazonaws.com/42331.jpg");
+  background-image: url("https://images-for-backgrounds.s3.us-east-2.amazonaws.com/plant.PNG");
+  background-color: rgba(153, 205, 50, 0.432);
   grid-area: header;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
   width: 110%;
@@ -48,10 +49,10 @@ textarea {
   grid-area: bio;
   margin-top: -50px;
   text-align: center;
-  box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px,
-    rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px,
-    rgba(0, 0, 0, 0.09) 0px 32px 16px;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+    rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
   background-color: white;
+
   padding: 30px;
   border-radius: 60px;
   height: 110%;
@@ -132,7 +133,8 @@ textarea {
   padding: 10px;
   border: none;
   box-shadow: rgba(50, 50, 93, 0.048) 0px 30px 60px -12px inset,
-    rgba(0, 0, 0, 0.041) 0px 18px 36px -18px inset;
+    rgba(0, 0, 0, 0.041) 0px 18px 36px -18px inset,
+    rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
 }
 .editBioTextArea {
   border-radius: 20px;
@@ -140,7 +142,8 @@ textarea {
   padding: 20px;
   border: none;
   box-shadow: rgba(50, 50, 93, 0.048) 0px 30px 60px -12px inset,
-    rgba(0, 0, 0, 0.041) 0px 18px 36px -18px inset;
+    rgba(0, 0, 0, 0.041) 0px 18px 36px -18px inset,
+    rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
 }
 .editSaveBtn {
   padding: 10px;

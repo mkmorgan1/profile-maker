@@ -7,7 +7,7 @@ const Bio = ({profile, toggleEditView, styles}) => {
       {/* BUTTONS */}
       <div>
         <div className={styles.btns}>
-          <span className={`${styles.inline}`}>
+          <span>
             <form action='/logout?_method=DELETE' method='POST' className={styles.logoutForm}>
               <button type='submit' className={`${styles.logoutBtn} ${styles.btn}`}><i className='fas fa-sign-out-alt'></i></button>
             </form>
@@ -22,7 +22,7 @@ const Bio = ({profile, toggleEditView, styles}) => {
         <h2>{profile.name}</h2>
         <div>{profile.email}</div>
         <hr/>
-        <div>About Me</div>
+        <h2>About Me</h2>
         <div>{profile.bio}</div>
       </div>
     </div>

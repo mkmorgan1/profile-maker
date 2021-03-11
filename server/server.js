@@ -88,7 +88,7 @@ app.delete('/logout', (req,res) => {
   res.redirect('/login');
 });
 
-/* PROFILE */
+/* GET THE DATA TO FILL THE PAGE */
 app.get('/data', (req, res) => {
   getAllMessages((err, messages) => {
     err ? res.status(404).send(err) :  res.status(200).send({messages: messages, user: req.user});
@@ -102,9 +102,10 @@ app.post('/edit', (req, res) => {
   });
 });
 
+/* POST A MESSAGE */
 app.post('/postMessage', (req, res) => {
   const time = new Date();
-  const dateTime = `(${time.getDate()}/${time.getMonth()+1}/${time.getFullYear()}) ${time.getHours()}:${time.getSeconds()}`;
+  const dateTime = `(${time.getDate()}/${time.getMonth()+1}/${time.getFullYear()}) ${time.getHours()}:${time.getMinutes()}`;
   let post = {
     name: req.user.name,
     message: req.body.postMessage,
