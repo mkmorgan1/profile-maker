@@ -21,9 +21,6 @@ const AllMessages = ({messages, styles}) => {
     index--;
   }
   return arrOfMessages;
-  // return messages.map((post) => {
-  //   return <IndividualMessage styles={styles} key={post.date} post={post}/>
-  // });
 }
 
 
